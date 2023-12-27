@@ -10,7 +10,7 @@ import java.util.Random;
 public class OneOfEachStats {
 	public static void main (String[] args) {
 		// Gets the two command-line arguments
-		int T = Integer.parseInt(args[0]);
+		int a = Integer.parseInt(args[0]);
 		int seed = Integer.parseInt(args[1]);
 		// Initailizes a random numbers generator with the given seed value
         Random generator = new Random(seed);  
@@ -24,6 +24,49 @@ public class OneOfEachStats {
 		//// just like you had in the previous version, except that the 
 		//// randomization will be based on the given seed.
 		//// This is the only change that you have to do in the program.
-		    
+
+		double sum = 0;
+		int count2 = 0;
+		int count3 = 0;
+		int count4 = 0;
+		for (int i=1; i<=a; i++)
+		{
+		   boolean stop = false;
+		   int boy = 0;
+		   int girl = 0;
+		   int children = 0;
+		   double num1 = 0;
+		   while (stop == false) 
+		   {
+		      num1 = generator.nextDouble();
+		      if (num1 > 0.5)
+		      {
+		 	     girl++;
+		      }
+		      if (num1 < 0.5)
+		      { 
+		 	  boy++;
+		      }
+		      if (boy>=1 && girl>=1)
+		      {
+		      stop = true;
+		      }
+		   }
+		   children = boy + girl;
+		   sum = sum + children;
+		   if (children == 2) count2++; //families with 2
+		   if (children == 3) count3++; //families with 3
+		   if (children >= 4) count4++; //families with 4
+	    }
+	    int max = Math.max(count2,count3);
+		//int maximal = Math.max(max,count4);
+		System.out.println("Average: "+sum/a+" children to get at least one of each gender.");
+		System.out.println("Number of families with 2 children: "+count2);
+		System.out.println("Number of families with 3 children: "+count3);
+		System.out.println("Number of families with 4 or more children: "+count4);
+		if ((count2 >= count3) && (count2 >= count4)) System.out.println("The most common number of children is 2");
+		if ((count3 > count2) && (count3 > count4)) System.out.println("The most common number of children is 3");
+		if ((count4 > count3) && (count4 > count2)) System.out.println("The most common number of children is 4");
+		  
 	}
 }
